@@ -1,6 +1,6 @@
-# fly.toml file generated for p13-open-class-room on 2023-03-29T22:58:50+02:00
+# fly.toml file generated for p3-official on 2023-03-30T18:07:43+02:00
 
-app = "p13-open-class-room"
+app = "p3-official"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "cdg"
@@ -17,3 +17,6 @@ processes = []
 [experimental]
   auto_rollback = true
 
+[[statics]]
+  guest_path = "/code/static"
+  url_prefix = "/static/"

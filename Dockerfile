@@ -1,26 +1,26 @@
-# base image
-FROM python:3.8
-# setup environment variable
-ENV DockerHOME=/home/app/webapp
+ARG PYTHON_VERSION=3.10-slim-buster
 
-# set work directory
-RUN mkdir -p $DockerHOME
+FROM python:${PYTHON_VERSION}
 
-# where your code lives
-WORKDIR $DockerHOME
-
-# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# install dependencies
-RUN pip install --upgrade pip
+RUN mkdir -p /code
 
-# copy whole project to your docker home directory. 
-COPY . $DockerHOME
-# run this command to install all dependencies
-RUN pip install -r requirements.txt
-# port where the Django app runs
+WORKDIR /code
+
+COPY requirements.txt /tmp/requirements.txt
+
+RUN set -ex && \
+    pip install --upgrade pip && \
+    pip install -r /tmp/requirements.txt && \
+    rm -rf /root/.cache/
+
+COPY . /code/
+
+RUN python manage.py collectstatic --noinput
+
 EXPOSE 8000
-# start server
-CMD python manage.py runserver
+
+# replace demo.wsgi with <project_name>.wsgi
+CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "demo.wsgi"]
