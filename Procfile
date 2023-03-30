@@ -1,1 +1,1 @@
-web: gunicorn oc_lettings_openclassroom.wsgi --log-file -
+web gunicorn oc_lettings_openclassroom.wsgi:application --log-file -
