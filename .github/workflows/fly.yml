@@ -30,8 +30,7 @@ jobs:
             . venv/bin/activate
             python3 manage.py test
   deploy:
-    machine:
-       image: ubuntu-2004:202201-02
+
     name: Deploy app
     runs-on: ubuntu-latest
     steps:
@@ -40,31 +39,3 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - checkout
-      - run: 
-          name: Create docker and push to docker hub 
-          command: |
-            echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-            docker build -t $DOCKER_USER/python-oc-lettings-fr:${CIRCLE_SHA1:0:7} .
-            docker push $DOCKER_USER/python-oc-lettings-fr:${CIRCLE_SHA1:0:7}
-      - run:
-          name: Push docker to Heroku
-          command: |
-            set -e
-            curl https://cli-assets.heroku.com/install.sh | sh
-            HEROKU_API_KEY=$HEROKU_API_KEY heroku create $HEROKU_APP_NAME --region eu || true
-            HEROKU_API_KEY=$HEROKU_API_KEY heroku config:set SECRET_KEY=$SECRET_KEY -a $HEROKU_APP_NAME
-            HEROKU_API_KEY=$HEROKU_API_KEY heroku config:set SENTRY_DSN=$SENTRY_DSN -a $HEROKU_APP_NAME
-            HEROKU_API_KEY=$HEROKU_API_KEY heroku config:set DEBUG=0 -a $HEROKU_APP_NAME
-            docker tag $DOCKER_USER/python-oc-lettings-fr:${CIRCLE_SHA1:0:7} $HEROKU_APP_NAME
-            HEROKU_API_KEY=$HEROKU_API_KEY heroku container:login
-            HEROKU_API_KEY=$HEROKU_API_KEY heroku container:push -a $HEROKU_APP_NAME web
-            HEROKU_API_KEY=$HEROKU_API_KEY heroku container:release -a $HEROKU_APP_NAME web
-
-workflows:
-  build_test_and_deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
