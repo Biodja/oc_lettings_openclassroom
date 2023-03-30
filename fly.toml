@@ -1,0 +1,19 @@
+# fly.toml file generated for p13-open-class-room on 2023-03-29T22:58:50+02:00
+
+app = "p13-open-class-room"
+kill_signal = "SIGINT"
+kill_timeout = 5
+primary_region = "cdg"
+processes = []
+
+[build]
+  image = "flyio/hellofly:latest"
+
+[env]
+  MAX_PLAYER_COUNT = "15"
+  MY_SPECIAL_ENV = "some_value"
+  PORT = "8000"
+
+[experimental]
+  auto_rollback = true
+
