@@ -1,6 +1,6 @@
-# fly.toml file generated for p13application on 2023-03-30T18:50:28+02:00
+# fly.toml file generated for p13retest on 2023-03-30T18:58:08+02:00
 
-app = "p13application"
+app = "p13retest"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "cdg"
