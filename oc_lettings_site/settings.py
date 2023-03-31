@@ -74,11 +74,14 @@ DATABASES = {
     'default': {
         
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4qlruqe5qqklo',
-        'USER': 'afsvpipfuywnxe',
-        'PASSWORD':'d298e984381fcf8740d0334325683a247e9220d8c964e00fe76d6e57e04f084d',
-        'PORT': '5432',
-        'HOST': 'ec2-3-83-61-239.compute-1.amazonaws.com'
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD':'postgrespw',
+        'PORT': '32768',
+        'HOST': 'host.docker.internal'
+
+
+        
         #'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
     }
 }
