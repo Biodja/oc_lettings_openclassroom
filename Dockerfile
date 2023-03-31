@@ -1,26 +1,23 @@
-ARG PYTHON_VERSION=3.10-slim-buster
+FROM python:3.8-alpine
 
-FROM python:${PYTHON_VERSION}
+WORKDIR /app
 
+# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV DEBUG 0
 
-RUN mkdir -p /code
+# install dependencies
+RUN pip install --upgrade pip 
+COPY ./requirements.txt /app
+RUN pip install -r requirements.txt
 
-WORKDIR /code
+# copy project
+COPY . /app
+VOLUME /app
 
-COPY requirements.txt /tmp/requirements.txt
-
-RUN set -ex && \
-    pip install --upgrade pip && \
-    pip install -r /tmp/requirements.txt && \
-    rm -rf /root/.cache/
-
-COPY . /code/
-
+# collect static files
 RUN python manage.py collectstatic --noinput
 
-EXPOSE 8000
-
-# replace demo.wsgi with <project_name>.wsgi
-CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "demo.wsgi"]
+# run gunicorn
+CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
