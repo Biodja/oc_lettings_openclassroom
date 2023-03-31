@@ -69,12 +69,13 @@ WSGI_APPLICATION = 'oc_lettings_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES =  dj_database_url.config()
-    #'default': {
-        #'default': dj_database_url.config(),
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
-    #"""
+DATABASES = {
+    'default': {
+        
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
+    }
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
