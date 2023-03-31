@@ -9,6 +9,6 @@ DATABASES['default'].update(db_from_env)
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['p13-open-class-room.herokuapp.com' , '127.0.0.1']
+ALLOWED_HOSTS = ['p13-open-class-room.herokuapp.com']
 
 #DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
