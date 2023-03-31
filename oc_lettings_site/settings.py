@@ -73,11 +73,11 @@ WSGI_APPLICATION = 'oc_lettings_site.wsgi.application'
 DATABASES = {
     'default': {
         
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'p13_data',
-        'USER': 'p13_data',
-        'PASSWORD':'27021996'
-        #'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': 'p13_data',
+        #'USER': 'p13_data',
+        #'PASSWORD':'27021996',
+        'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
     }
 }
 
