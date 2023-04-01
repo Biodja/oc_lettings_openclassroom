@@ -1,23 +1,33 @@
-FROM python:3.10
+# pull official base image
+FROM python:3.10-alpine
 
-WORKDIR /app
+# set work directory
+WORKDIR /code
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBUG 0
 
+# install psycopg2
+RUN apk update \
+    && apk add --virtual build-essential gcc python3-dev musl-dev \
+    && apk add postgresql-dev \
+    && pip install psycopg2
+
 # install dependencies
-RUN pip install --upgrade pip 
-COPY ./requirements.txt /app
+COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy project
-COPY . /app
-VOLUME /app
+COPY . /code/
 
 # collect static files
 RUN python manage.py collectstatic --noinput
-EXPOSE 8000
+
+# add and run as non-root user
+RUN adduser -D myuser
+USER myuser
+
 # run gunicorn
-CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn hello_django.wsgi:application --bind 0.0.0.0:$PORT
