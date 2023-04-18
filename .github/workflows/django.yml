@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.10", "3.11"]
     steps: 
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -46,6 +46,6 @@ jobs:
       with:
         args: container:login
     - name: set remote
-      run: git remote set-url origin https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/{{your app name }}.git
+      run: git remote set-url origin https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/{{ p13-openclassroom-pipeline }}.git
     - name: push and deploy
       run: git push origin HEAD:master -f
