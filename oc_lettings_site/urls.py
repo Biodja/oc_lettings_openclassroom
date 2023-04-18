@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path , include
-
+from .views import ping
 from . import views
 from Profiles.views import profiles_index , profile
 from Lettings.views import lettings_index, letting
@@ -14,5 +14,6 @@ urlpatterns = [
     path('lettings' ,include('Lettings.urls')),
     path('profiles' ,include('Profiles.urls')),
     path('admin/', admin.site.urls),
+    path('ping/', ping, name="ping"),
 
 ]

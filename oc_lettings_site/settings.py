@@ -73,24 +73,24 @@ WSGI_APPLICATION = 'oc_lettings_site.wsgi.application'
 DATABASES = {
     'default': {
         
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4qlruqe5qqklo',
-        'USER': 'afsvpipfuywnxe',
-        'PASSWORD':'d298e984381fcf8740d0334325683a247e9220d8c964e00fe76d6e57e04f084d',
-        'PORT': '5432',
-        'HOST': 'ec2-3-83-61-239.compute-1.amazonaws.com'
+        'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': 'd4qlruqe5qqklo',
+        #'USER': 'postgres',
+        #'PASSWORD':'postgres',
+        #'PORT': '5432',
+        #'HOST': 'ec2-3-83-61-239.compute-1.amazonaws.com'
 
 
         
-        #'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
     }
 }
 
 
 
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -131,4 +131,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
