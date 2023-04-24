@@ -15,17 +15,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Install Selenium Chrome Driver (OSX)
-        if: runner.os == 'macOs'
-        run: brew install --cask chromedriver
-      - name: Activate virtual environment
-        run: source E:/Python/P13_NEW/oc_lettings_openclassroom/env/Scripts/activate
       - name: Setup Python ${{ matrix.python }}
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python }}
       - name: Install dependencies
         run: |
+          python -m venv env
+          source env/bin/activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run tests
