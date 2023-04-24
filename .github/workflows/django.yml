@@ -28,6 +28,5 @@ jobs:
       - name: Run tests
         env:
           SECRET_KEY: fake-secret-key
-        run: |
-          cp .env.example .env
+        run: |          
           python manage.py test
