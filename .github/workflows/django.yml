@@ -18,6 +18,8 @@ jobs:
       - name: Install Selenium Chrome Driver (OSX)
         if: runner.os == 'macOs'
         run: brew install --cask chromedriver
+      - name: Activate virtual environment
+        run: source E:/Python/P13_NEW/oc_lettings_openclassroom/env/Scripts/activate
       - name: Setup Python ${{ matrix.python }}
         uses: actions/setup-python@v1
         with:
