@@ -1,26 +1,33 @@
-ARG PYTHON_VERSION=3.10-slim-buster
+# pull official base image
+FROM python:3.10-alpine
 
-FROM python:${PYTHON_VERSION}
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-RUN mkdir -p /code
-
+# set work directory
 WORKDIR /code
 
-COPY requirements.txt /tmp/requirements.txt
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV DEBUG 0
 
-RUN set -ex && \
-    pip install --upgrade pip && \
-    pip install -r /tmp/requirements.txt && \
-    rm -rf /root/.cache/
+# install psycopg2
+RUN apk update \
+    && apk add --virtual build-essential gcc python3-dev musl-dev \
+    && apk add postgresql-dev \
+    && pip install psycopg2
 
+# install dependencies
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+# copy project
 COPY . /code/
 
-#RUN python manage.py collectstatic --noinput
+# collect static files
+RUN python manage.py collectstatic --noinput
 
-EXPOSE 8000
+# add and run as non-root user
+RUN adduser -D myuser
+USER myuser
 
-# replace demo.wsgi with <project_name>.wsgi
-CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "demo.wsgi"]
+# run gunicorn
+CMD gunicorn hello_django.wsgi:application --bind 0.0.0.0:$PORT
