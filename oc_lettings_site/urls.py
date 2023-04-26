@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.urls import path , include
 from .views import ping
 from . import views
-from Profiles.views import profiles_index , profile
-from Lettings.views import lettings_index, letting
 
 app_name = 'Profiles' 
 

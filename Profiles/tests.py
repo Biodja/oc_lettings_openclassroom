@@ -3,7 +3,6 @@ from django.urls import reverse
 from Profiles.models import Profile
 from django.contrib.auth.models import User
 
-from django.test import TestCase
 
 class ProfilesTestCase(TestCase):
     
