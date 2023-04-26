@@ -19,7 +19,7 @@ class LettingsTestCase(TestCase):
         self.assertTrue('title' in str(resp.content))
 
     def test_profil_param(self):
-        uri = reverse("lettings", kwargs={"letting_id": "Oceanview Retreat"})
+        uri = reverse("lettings", kwargs={"letting_id": 1})
         resp = self.client.get(uri)
         self.assertTrue('title' in str(resp.content))
 
