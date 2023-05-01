@@ -2,10 +2,11 @@ from django.contrib import admin
 from django.urls import path , include
 from .views import ping
 from . import views
-from django.urls import path
+
 
 def trigger_error(request):
     division_by_zero = 1 / 0
+    print(division_by_zero)
 
 app_name = 'Profiles' 
 
