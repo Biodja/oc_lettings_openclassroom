@@ -3,6 +3,7 @@ on:
   push:
     branches-ignore:
       - master 
+      - main
 jobs:
   test-and-lint:
     name: Testing app and Lint
@@ -17,8 +18,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: upgrade pip
-        run: 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
