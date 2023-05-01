@@ -47,6 +47,8 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - `source venv/bin/activate`
 - `flake8`
 
+
+
 #### Tests unitaires
 
 - `cd /path/to/Python-OC-Lettings-FR`
@@ -74,4 +76,11 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
-- Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+### deploy et test
+
+- un commit sur la branche master lance les tests
+
+- deployment de l'app sur fly.io
+
+- tout push sur un autre branche lance le linting et les test
