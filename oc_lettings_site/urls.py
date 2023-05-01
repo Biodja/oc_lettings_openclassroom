@@ -14,7 +14,6 @@ app_name = 'Profiles'
 urlpatterns = [
     path('', views.index, name='index'),
     path('test/', trigger_error),
-
     path('lettings' ,include('Lettings.urls')),
     path('profiles' ,include('Profiles.urls')),
     path('admin/', admin.site.urls),
