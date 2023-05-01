@@ -22,7 +22,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 #### Créer l'environnement virtuel
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd P13_NEW\oc_lettings_openclassroom`
 - `python -m venv venv`
 - `apt-get install python3-venv` (Si l'étape précédente comporte des erreurs avec un paquet non trouvé sur Ubuntu)
 - Activer l'environnement `source venv/bin/activate`
@@ -34,7 +34,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 #### Exécuter le site
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd P13_NEW\oc_lettings_openclassroom`
 - `source venv/bin/activate`
 - `pip install --requirement requirements.txt`
 - `python manage.py runserver`
@@ -43,7 +43,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 #### Linting
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd P13_NEW\oc_lettings_openclassroom`
 - `source venv/bin/activate`
 - `flake8`
 
@@ -51,13 +51,13 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 #### Tests unitaires
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd P13_NEW\oc_lettings_openclassroom`
 - `source venv/bin/activate`
 - `pytest`
 
 #### Base de données
 
-- `cd /path/to/Python-OC-Lettings-FR`
+- `cd P13_NEW\oc_lettings_openclassroom`
 - Ouvrir une session shell `sqlite3`
 - Se connecter à la base de données `.open oc-lettings-site.sqlite3`
 - Afficher les tables dans la base de données `.tables`
@@ -82,5 +82,6 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 - un commit sur la branche master lance les tests
 
 - deployment de l'app sur fly.io
+https://p13-new.fly.dev/
 
 - tout push sur un autre branche lance le linting et les test
