@@ -1,6 +1,6 @@
+ARG PYTHON_VERSION=3.10-slim-buster
 
-
-FROM  python:3.9
+FROM python:${PYTHON_VERSION}
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -18,7 +18,7 @@ RUN set -ex && \
 
 COPY . /code/
 
-RUN python3 manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 

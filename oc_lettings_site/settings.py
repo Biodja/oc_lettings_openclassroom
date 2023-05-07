@@ -1,5 +1,5 @@
 import os
-import django_heroku
+
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -149,7 +149,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

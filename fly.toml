@@ -1,13 +1,10 @@
-# fly.toml file generated for p13-new on 2023-04-26T16:18:35+02:00
+# fly.toml file generated for p13-soutenance on 2023-05-07T15:27:17+02:00
 
-app = "p13-new"
+app = "p13-soutenance"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "cdg"
 processes = []
-
-[deploy]
-  release_command = "python manage.py migrate"
 
 [env]
   PORT = "8000"
